@@ -1,21 +1,19 @@
 <template>
   <main class="relative">
     <header>
-      <NavHeader />
+      <NavsHeader />
     </header>
     <section class="container mx-auto mt-24 grid">
       <Nuxt />
     </section>
+    <footer>
+      <NavsFooter />
+    </footer>
   </main>
 </template>
 
 <script>
-import NavHeader from '~/components/NavHeader.vue'
-export default {
-  components: {
-    NavHeader,
-  },
-}
+export default {}
 </script>
 
 <style lang="postcss">

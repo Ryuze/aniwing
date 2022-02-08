@@ -31,7 +31,6 @@
 
 <script>
 export default {
-  name: 'NavHeader',
   data() {
     return {
       search: null,

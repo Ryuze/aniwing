@@ -1,5 +1,5 @@
 <template>
-  <section class="grid place-items-center bg-sky-400/75">
+  <section class="grid place-items-center bg-sky-400/75 pb-3">
     <article
       v-if="$fetchState.pending"
       class="h-screen grid place-items-center"
