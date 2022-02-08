@@ -51,29 +51,29 @@
           </a>
         </div>
         <div v-if="anime.data.Media.isAdult">
-          <p class="text-red-600 font-bold text-2xl font-head">
+          <p class="text-red-600 font-bold text-2xl font-head text-center">
             WARNING: Anime mengandung unsur R-18
           </p>
         </div>
         <article
-          class="grid lg:grid-rows-5 lg:grid-flow-col gap-x-6 gap-y-2 font-normal text-gray-800"
+          class="grid lg:grid-rows-5 lg:grid-flow-col gap-x-6 gap-y-2 font-normal text-gray-800 w-4/5"
         >
           <div class="grid grid-cols-2 content-center">
-            <p>Judul native:</p>
+            <p class="self-center leading-4">Judul native:</p>
             <p class="justify-self-end">{{ anime.data.Media.title.native }}</p>
           </div>
           <div class="grid grid-cols-2 content-center">
-            <p>Format anime:</p>
+            <p class="self-center">Format anime:</p>
             <p class="justify-self-end">{{ anime.data.Media.format }}</p>
           </div>
           <div class="grid grid-cols-2 content-center">
-            <p>Tanggal tayang:</p>
+            <p class="self-center">Tanggal tayang:</p>
             <p class="justify-self-end">
               {{ this.toDate(anime.data.Media.startDate) }}
             </p>
           </div>
           <div class="grid grid-cols-2 content-center">
-            <p>Tanggal selesai:</p>
+            <p class="self-center">Tanggal selesai:</p>
             <p class="justify-self-end">
               {{
                 anime.data.Media.endDate
@@ -87,17 +87,17 @@
             <p class="justify-self-end">{{ anime.data.Media.status }}</p>
           </div>
           <div class="grid grid-cols-2 content-center">
-            <p>Genre:</p>
-            <p class="justify-self-end">
+            <p class="self-center">Genre:</p>
+            <p class="justify-self-end leading-4">
               {{ anime.data.Media.genres.join(', ') }}
             </p>
           </div>
           <div class="grid grid-cols-2 content-center">
-            <p>Episode:</p>
+            <p class="self-center">Episode:</p>
             <p class="justify-self-end">{{ anime.data.Media.episodes }}</p>
           </div>
           <div class="grid grid-cols-2 content-center">
-            <p>Durasi per episode:</p>
+            <p class="self-center">Durasi per episode:</p>
             <p class="justify-self-end">
               {{ anime.data.Media.duration }} Menit
             </p>
@@ -112,14 +112,21 @@
             >
           </div>
         </article>
-        <article v-if="anime.data.Media.description" class="grid text-gray-800 mx-2 text-justify">
-          <p class="font-head font-bold text-xl">Deskripsi</p>
-          <p v-html="anime.data.Media.description" />
+        <article
+          v-if="anime.data.Media.description"
+          class="grid w-full text-gray-800 text-justify"
+          :class="anime.data.Media.characters.edges.length == 0 ? 'mb-2' : ''"
+        >
+          <p class="font-head font-bold text-xl mx-2">Deskripsi</p>
+          <p class="mx-2" v-html="anime.data.Media.description" />
         </article>
-        <article v-if="anime.data.Media.characters.edges" class="grid text-gray-800 mx-2 text-justify mb-2">
-          <p class="font-head font-bold text-xl">Karakter</p>
+        <article
+          v-if="!anime.data.Media.characters.edges.length == 0"
+          class="grid w-full text-gray-800 text-justify mb-2"
+        >
+          <p class="font-head font-bold text-xl mx-2">Karakter</p>
           <div
-            class="grid grid-cols-3 lg:grid-cols-6 justify-items-center gap-2"
+            class="grid grid-cols-3 lg:grid-cols-6 justify-items-center gap-2 mx-2"
           >
             <div
               v-for="character in anime.data.Media.characters.edges"
@@ -136,7 +143,10 @@
               <p class="font-bold text-center">
                 {{ character.node.name.full }}
               </p>
-              <p class="font-light text-center">
+              <p
+                v-if="character.node.name.native"
+                class="font-light text-center"
+              >
                 ({{ character.node.name.native }})
               </p>
               <p class="font-bold text-sm text-center">{{ character.role }}</p>
@@ -173,8 +183,8 @@ export default {
   },
   async fetch() {
     const query = `
-      query($id: Int, $type: MediaType) {
-        Media(id: $id, type: $type) {
+      query($id: Int) {
+        Media(id: $id) {
           idMal
           coverImage {
             extraLarge

@@ -45,9 +45,9 @@ export default {
         query($page: Int, $perPage: Int, $rating: Int) {
           Page(page: $page, perPage: $perPage) {
             recommendations(rating_greater: $rating, sort: RATING) {
-              id
               rating
               media {
+                id
                 title {
                   romaji
                   english
