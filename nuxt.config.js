@@ -36,6 +36,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    '@nuxtjs/google-fonts'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -64,4 +65,11 @@ export default {
     color: '#FFD432',
     height: '3px',
   },
+
+  googleFonts: {
+    families: {
+      Gelasio: true,
+      'Signika+Negative': [300, 400, 700]
+    }
+  }
 }

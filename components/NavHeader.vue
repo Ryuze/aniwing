@@ -1,7 +1,7 @@
 <template>
-  <div class="fixed block top-0 left-0 right-0 bg-sky-500 py-5 text-gray-100 z-50">
+  <div class="fixed block top-0 left-0 right-0 bg-sky-400 py-5 text-gray-100 z-50">
     <div class="container mx-auto grid grid-cols-2 justify-between">
-      <div class="ml-2">
+      <div class="ml-2 self-center font-head">
         <nuxt-link to="/">AniWing</nuxt-link>
       </div>
       <div class="mr-2 justify-self-end grid grid-cols-2 gap-0">

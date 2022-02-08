@@ -1,20 +1,18 @@
 <template>
-  <div class="grid lg:grid-cols-5 gap-2 place-items-center">
-    <div class="col-span-5">
-      <p class="text-lg font-bold text-gray-800">
+  <section class="grid grid-cols-1 lg:grid-cols-5 gap-4 place-items-center">
+    <article class="lg:col-span-5">
+      <p class="text-lg font-bold text-gray-800 text-center font-head">
         Rekomendasi acak untuk anda kali ini!
       </p>
-    </div>
-    <section v-for="anime in animeRecommendations" :key="anime.id">
-      <div class="grid justify-center">
+    </article>
+    <section v-for="anime in animesRecommendation" :key="anime.id">
+      <article class="grid justify-center font-body">
         <img
           :src="anime.media.coverImage.large"
           alt="cover"
           class="rounded justify-self-center"
         />
-        <p
-          class="justify-self-center mt-2 font-medium text-gray-800 text-center"
-        >
+        <p class="justify-self-center mt-2 font-bold text-gray-800 text-center">
           {{
             anime.media.title.english
               ? anime.media.title.english
@@ -26,16 +24,15 @@
         >
           ( {{ anime.media.title.romaji }} )
         </p>
-      </div>
+      </article>
     </section>
-  </div>
+  </section>
 </template>
 
 <script>
 export default {
-  name: 'RecommendationList',
   props: {
-    animeRecommendations: Array,
+    animesRecommendation: Array,
   },
 }
 </script>
