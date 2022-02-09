@@ -2,19 +2,23 @@
   <section
     class="grid gap-4 justify-items-center bg-sky-400/75 rounded-sm mt-2"
   >
-    <article class="flex mt-2 gap-4 font-head">
-      <div>
+    <article class="mt-2">
+      <p class="font-head font-bold text-2xl text-white text-center">
+        Anime Yang Tayang Pada Musim Ini
+      </p>
+    </article>
+    <section class="grid grid-cols-4 gap-2 font-body mx-2 justify-items-center">
+      <article>
         <label for="year" class="font-bold text-white">Tahun</label>
         <input
           v-model="year"
           type="number"
           name="year"
           id="year"
-          class="rounded py-1 placeholder:italic placeholder:text-gray-400 block bg-white w-full border text-gray-700 px-2 shadow focus:outline-none focus:border-teal-500 focus:ring-teal-500 focus:ring-1"
+          class="rounded py-1 px-2 placeholder:italic placeholder:text-gray-400 block bg-white w-full border text-gray-700 shadow focus:outline-none focus:border-teal-500 focus:ring-teal-500 focus:ring-1"
         />
-      </div>
-
-      <div>
+      </article>
+      <article>
         <label for="seasons" class="font-bold text-white">Season</label>
         <select
           v-model="season"
@@ -32,33 +36,29 @@
             {{ toTitleCase(item.season) }}
           </option>
         </select>
-      </div>
-
-      <div>
-        <label for="explicit" class="font-bold text-white"
-          >Explicit Content</label
-        >
+      </article>
+      <article>
+        <label for="explicit" class="font-bold text-white">R-18</label>
         <div class="self-center">
           <input
             type="checkbox"
             name="explicit"
             id="explicit"
-            class="h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 cursor-pointer"
+            class="h-8 w-8 border border-gray-300 rounded-md bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 cursor-pointer"
             :checked="isAdult"
             v-model="isAdult"
           />
         </div>
-      </div>
-
-      <div>
+      </article>
+      <article class="self-center">
         <button
           @click="filterSeasonalAnimes"
-          class="transition px-4 py-2 bg-green-500 mt-5 rounded text-white hover:bg-green-600 ease-in-out duration-200 active:bg-green-700/90"
+          class="transition px-4 py-2 bg-green-500 rounded text-white hover:bg-green-600 ease-in-out duration-200 active:bg-green-700/90"
         >
           Filter
         </button>
-      </div>
-    </article>
+      </article>
+    </section>
     <article
       v-if="$fetchState.pending"
       class="h-screen grid place-items-center"
@@ -80,8 +80,34 @@
     </article>
     <section
       v-else
-      class="grid lg:grid-cols-3 gap-8 place-items-center font-body"
+      class="grid lg:grid-cols-3 gap-2 lg:gap-4 place-items-center font-body"
     >
+      <article
+        class="grid grid-cols-2 lg:col-span-3 place-self-center gap-4 mb-2"
+      >
+        <div
+          :class="!pageInfo.hasNextPage ? 'col-span-2' : ''"
+          v-show="currentPage > 1"
+        >
+          <button @click="previousPage" class="bg-white rounded-3xl px-4 py-2">
+            <font-awesome-icon
+              :icon="['fas', 'angle-left']"
+              class="text-gray-700"
+            />
+          </button>
+        </div>
+        <div
+          :class="currentPage == 1 && pageInfo.hasNextPage ? 'col-span-2' : ''"
+          v-show="pageInfo.hasNextPage"
+        >
+          <button @click="nextPage" class="bg-white rounded-3xl px-4 py-2">
+            <font-awesome-icon
+              :icon="['fas', 'angle-right']"
+              class="text-gray-700"
+            />
+          </button>
+        </div>
+      </article>
       <AnimeCard
         v-for="anime in seasonalAnimes.media"
         :key="anime.id"
