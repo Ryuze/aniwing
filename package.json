@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
-    "start": "nuxt start --hostname '0'",
+    "start": "nuxt start --hostname '0' --port 8080",
     "generate": "nuxt generate",
     "lint:prettier": "prettier --check .",
     "lint": "npm run lint:prettier",
