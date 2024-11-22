@@ -4,6 +4,8 @@ COPY . /app/
 
 WORKDIR /app
 
+USER root
+
 RUN npm install
 
 RUN npm run build
